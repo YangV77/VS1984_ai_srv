@@ -1,4 +1,4 @@
-# VS1984 NextJS Demo
+# VS1984 NextJS Demo only base on nvidia gpu now！
 
 ## Preparing the Model:
 
