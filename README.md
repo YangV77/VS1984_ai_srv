@@ -1,6 +1,12 @@
 # VS1984 NextJS Demo
 
-***Currently, only Ubuntu 24.04 is supported.***
+## Preparing the Model:
+
+Go to Hugging Face (search for gemma-3-1b-it-Q4_K_M.gguf; other models require you to configure vshome/cnf/config.xbc). Common repositories are *-GGUF repositories (such as bartowski/... or unsloth/...).
+
+Download to your local machine: ./models
+
+```
 
 ## In Ubuntu24.04 you can simply run:
 ```bash
@@ -110,6 +116,25 @@ This service is completed collaboratively by three types of nodes:
 > VS1984 RAG Service is a decentralized knowledge network that allows AI to "use data without touching it."
 
 ---
+
+## Configuration
+
+```text
+
+In the config.xbc configuration file:
+
+"rag": {"indexer": true, "model": "models/gemma-3-1b-it-Q4_K_M.gguf", "rag_path" : "."},
+
+"indexer": true indicates that this node is an Indexer node.
+
+"model": "model_path" is the path to your local LLM model.
+
+"rag_path": "." indicates the path to the rag subroutine.
+
+You can add -dd when starting the program to view more detailed logs. Refer to the VS1984 documentation for details.
+
+```
+
 ## First Run
 
 ```text Generate Certificate

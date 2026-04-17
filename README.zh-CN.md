@@ -2,11 +2,18 @@
 
 ***现阶段, 只支持ubuntu24.04***
 
+## 准备模型:
+```
+去 Hugging Face（搜索 gemma-3-1b-it-Q4_K_M.gguf, 其他模型需要你配置vshome/cnf/config.xbc），常见是 *-GGUF 仓库（如 bartowski/... 或 unsloth/... 这类）。
+下载到本地 ./models
+```
+
 ## Ubuntu24.04 环境中, 简单运行命令即可尝试:
 ```bash
 npm install && npm run start
 ```
 ## 在 Docker 环境中尝试:
+
 ### Linux:
 ```bash
  docker compose -f docker-compose.linux.yml up -d --build
@@ -97,6 +104,16 @@ VS1984 RAG Service 提供的解决方案：
 > VS1984 RAG Service 是一个让 AI 可以“在不触碰数据的情况下使用数据”的去中心化知识网络。
 
 ---
+
+## 配置
+```text
+ 在config.xbc配置文件中配置:
+   "rag": {"indexer": true, "model": "models/gemma-3-1b-it-Q4_K_M.gguf", "rag_path" : "."},
+   "indexer": true 表示：表示此节点为Indexer节点
+   "model": "model_path" 是你本地llm模型的路径
+   "rag_path" : "." 表示rag子程序的路径
+ 可以在启动程序时增加-dd 来查看更详细的日志,具体可以参考VS1984的说明书
+```
 
 ## 初次运行
 ```text

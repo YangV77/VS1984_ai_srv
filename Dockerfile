@@ -65,10 +65,17 @@ EXPOSE 4000
 COPY --from=build /app /app
 RUN ln -sf /app/lib/native/vs1984-btd /usr/bin/vs1984-btd \
  && ln -sf /app/lib/native/vs1984-btd /usr/local/bin/vs1984-btd \
- && ln -sf /app/lib/native/vs1984-btd /app/vs1984-btd
+ && ln -sf /app/lib/native/vs1984-btd /app/vs1984-btd \
+ && mkdir -p /app/app/lib \
+ && ln -sfn /app/lib/native /app/app/lib/native \
+ && ln -sfn /app/lib/native /app/app/lib/natvie
 
 # Ensure BT daemon is executable (in case git lost +x bit)
-RUN chmod +x /app/lib/native/vs1984-btd || true
+RUN chmod +x /app/lib/native/vs1984-btd /app/lib/native/vs1984-rag || true
+
+# Fail fast if required local-LLM assets are missing in image.
+RUN test -x /app/lib/native/vs1984-rag \
+ && test -f /app/models/gemma-3-1b-it-Q4_K_M.gguf
 
 # Optional safety net (doesn't hurt even if RUNPATH is correct)
 ENV LD_LIBRARY_PATH=/app/lib/native/lib:${LD_LIBRARY_PATH}
